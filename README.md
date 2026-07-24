@@ -2,7 +2,7 @@
 
 ## Стек технологий
 
-React, TypeScript, Vite, CSS Modules
+React, JavaScript, Vite, CSS Modules, FSD
 
 ---
 
@@ -15,3 +15,6 @@ npm install
 # Запуск в dev режиме
 npm run dev
 ```
+
+Контакты
+TG: @max12670
