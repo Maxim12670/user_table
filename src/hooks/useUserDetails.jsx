@@ -1,20 +1,27 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 import { getUserById } from "../api/usersApi";
 
-export const useUserDetails = () => {
-  const [user, setUser] = useState([]);
+export const useUserDetails = ({ id }) => {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!id) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
     const fetchUser = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        const data = await getUserById();
+        const data = await getUserById(id);
 
-        setUser(data.users);
+        setUser(data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -23,7 +30,7 @@ export const useUserDetails = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [id]);
 
   return {
     user,

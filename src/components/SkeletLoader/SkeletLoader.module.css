@@ -1,9 +1,0 @@
-.loader {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-.loader__title {
-  font-size: 24px;
-}

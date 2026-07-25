@@ -5,7 +5,7 @@ export const useUsers = () => {
   const [users, setUsers] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const [page, setPage] = useState(1);
@@ -19,7 +19,7 @@ export const useUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
         setError(null);
 
         const data = await getUsers({
@@ -34,7 +34,7 @@ export const useUsers = () => {
       } catch (error) {
         setError(error.message);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -44,7 +44,7 @@ export const useUsers = () => {
   return {
     users,
     total,
-    loading,
+    isLoading,
     error,
     page,
     setPage,
