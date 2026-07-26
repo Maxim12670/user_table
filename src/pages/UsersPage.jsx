@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-import { Pagination } from "antd";
+import { Pagination, Skeleton } from "antd";
 import Table from "../components/Table/Table";
 import { useUsers } from "../hooks/useUsers";
 import { useEffect, useState } from "react";
 import UserCard from "../components/UserCard/UserCard";
 
 const UsersPage = () => {
-  const { users, isLoading, error, total, page, setPage } = useUsers();
+  const { users, isLoading, error, total, page, setPage, sort, setSort } =
+    useUsers();
   const [selectId, setSelectId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,10 +16,6 @@ const UsersPage = () => {
       setIsOpen(true);
     }
   }, [selectId]);
-
-  if (isLoading) {
-    return <div>Загрузка пользователей...</div>;
-  }
 
   if (error) {
     return <div>Ошибка загрузки: {error}</div>;
@@ -35,14 +32,39 @@ const UsersPage = () => {
 
   return (
     <div style={{ width: "1400px", margin: "0 auto" }}>
-      <Table users={users} onClick={handleSelectUser} />
-      <Pagination
-        defaultCurrent={page}
-        total={total}
-        pageSize={10}
-        showSizeChanger={false}
-        onChange={setPage}
-      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "20px",
+          width: "100%",
+        }}
+      >
+        {!isLoading ? (
+          <Table
+            users={users}
+            onClick={handleSelectUser}
+            sorting={sort}
+            onSorting={setSort}
+          />
+        ) : (
+          <Skeleton
+            active
+            paragraph={{ rows: 14 }}
+            title={{ width: "100%" }}
+            style={{ width: "100%", height: 491 }}
+          />
+        )}
+
+        <Pagination
+          defaultCurrent={page}
+          total={total}
+          pageSize={10}
+          showSizeChanger={false}
+          onChange={setPage}
+        />
+      </div>
 
       {selectId && (
         <UserCard

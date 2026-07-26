@@ -1,6 +1,5 @@
 .table-wrapper {
   width: 100%;
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -11,6 +10,10 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   background: white;
+}
+
+.table-header {
+  cursor: pointer;
 }
 
 .table-container {

@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-table";
 import "./Table.css";
 import { COLUMNS } from "./columns";
+import { getTypeSorting } from "./utils/getTypeSorting";
 
 const data = [
   {
@@ -70,12 +71,13 @@ const data = [
   },
 ];
 
-const Table = ({ users = data, onClick }) => {
+const Table = ({ users = data, sorting, onClick, onSorting }) => {
   const MIN_COLUMN_WIDTH = 50;
   const containerRef = useRef(null);
 
   const table = useReactTable({
     data: users,
+    manualSorting: true,
     columns: COLUMNS,
     getCoreRowModel: getCoreRowModel(),
     columnResizeMode: "onChange",
@@ -112,6 +114,7 @@ const Table = ({ users = data, onClick }) => {
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   const width = header.getSize();
+                  const canSort = header.column.getCanSort();
 
                   return (
                     <th
@@ -123,10 +126,22 @@ const Table = ({ users = data, onClick }) => {
                         position: "relative",
                       }}
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                      <div
+                        className="table-header"
+                        onClick={() => {
+                          if (!canSort) return;
+
+                          onSorting(getTypeSorting(sorting, header.column.id));
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+
+                        {sorting.field === header.column.id &&
+                          (sorting.order === "asc" ? " ▲" : " ▼")}
+                      </div>
 
                       <div
                         onMouseDown={header.getResizeHandler()}
