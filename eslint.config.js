@@ -9,6 +9,7 @@ export default defineConfig([
   {
     rules: {
       "no-unused-vars": "warn",
+      "react-hooks/set-state-in-effect": "off",
     },
     files: ["**/*.{js,jsx}"],
     extends: [

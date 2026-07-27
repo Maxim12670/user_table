@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
-import { Pagination, Skeleton, Input, Button } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Pagination, Skeleton } from "antd";
 import Table from "../components/Table/Table";
 import UserCard from "../components/UserCard/UserCard";
 import { useUsers } from "../hooks/useUsers";
+import SearchForm from "../components/SearchForm/SearchForm";
 
 const UsersPage = () => {
   const {
@@ -41,12 +40,6 @@ const UsersPage = () => {
     setSelectId(null);
   };
 
-  const handleChangeSearchString = (event) => {
-    const str = event.target.value;
-
-    setSearchString(str);
-  };
-
   const handleClickSearch = () => {
     setSearch(searchString);
   };
@@ -63,26 +56,7 @@ const UsersPage = () => {
         paddingTop: 20,
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "700px",
-          gap: "12px",
-        }}
-      >
-        <Input
-          placeholder="Поиск по ФИО, возрасту, полу, номеру телефона..."
-          onChange={handleChangeSearchString}
-        />
-        <Button
-          icon={<SearchOutlined />}
-          type="primary"
-          onClick={handleClickSearch}
-        >
-          Поиск
-        </Button>
-      </div>
+      <SearchForm onChange={setSearchString} onClick={handleClickSearch} />
 
       <div
         style={{

@@ -8,70 +8,7 @@ import "./Table.css";
 import { COLUMNS } from "./columns";
 import { getTypeSorting } from "./utils/getTypeSorting";
 
-const data = [
-  {
-    id: 1,
-    surname: "Иванов",
-    name: "Иван",
-    patronymic: "Иванович",
-    age: 28,
-    gender: "male",
-    phone: "+7 (999) 123-45-67",
-    email: "ivanov@mail.ru",
-    country: "Россия",
-    city: "Москва",
-  },
-  {
-    id: 2,
-    surname: "Петрова",
-    name: "Анна",
-    patronymic: "Петровна",
-    age: 32,
-    gender: "female",
-    phone: "+7 (988) 765-43-21",
-    email: "petrova@mail.ru",
-    country: "Россия",
-    city: "Санкт-Петербург",
-  },
-  {
-    id: 3,
-    surname: "Сидоров",
-    name: "Алексей",
-    patronymic: "Сергеевич",
-    age: 45,
-    gender: "male",
-    phone: "+7 (977) 555-12-34",
-    email: "sidorov@mail.ru",
-    country: "Россия",
-    city: "Новосибирск",
-  },
-  {
-    id: 4,
-    surname: "Козлова",
-    name: "Екатерина",
-    patronymic: "Алексеевна",
-    age: 27,
-    gender: "female",
-    phone: "+7 (916) 333-44-55",
-    email: "kozlov@mail.ru",
-    country: "Россия",
-    city: "Екатеринбург",
-  },
-  {
-    id: 5,
-    surname: "Михайлов",
-    name: "Дмитрий",
-    patronymic: "Михайлович",
-    age: 38,
-    gender: "male",
-    phone: "+7 (903) 777-88-99",
-    email: "mikhailov@mail.ru",
-    country: "Россия",
-    city: "Казань",
-  },
-];
-
-const Table = ({ users = data, sorting, onClick, onSorting }) => {
+const Table = ({ users, sorting, onClick, onSorting }) => {
   const MIN_COLUMN_WIDTH = 50;
   const containerRef = useRef(null);
 
