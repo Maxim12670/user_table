@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/set-state-in-effect */
+import { useEffect, useState } from "react";
 import { Pagination, Skeleton, Input, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Table from "../components/Table/Table";
-import { useUsers } from "../hooks/useUsers";
-import { useEffect, useState } from "react";
 import UserCard from "../components/UserCard/UserCard";
+import { useUsers } from "../hooks/useUsers";
 
 const UsersPage = () => {
   const {
