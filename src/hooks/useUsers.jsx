@@ -10,6 +10,7 @@ export const useUsers = () => {
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [search, setSearch] = useState("");
 
   const [sort, setSort] = useState({
     field: null,
@@ -27,6 +28,7 @@ export const useUsers = () => {
           limit,
           sortBy: sort.field,
           order: sort.order,
+          search: search,
         });
 
         setUsers(data.users);
@@ -39,7 +41,7 @@ export const useUsers = () => {
     };
 
     fetchUsers();
-  }, [page, limit, sort]);
+  }, [page, limit, sort, search]);
 
   return {
     users,
@@ -52,5 +54,6 @@ export const useUsers = () => {
     setLimit,
     sort,
     setSort,
+    setSearch,
   };
 };

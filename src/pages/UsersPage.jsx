@@ -1,15 +1,26 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-import { Pagination, Skeleton } from "antd";
+import { Pagination, Skeleton, Input, Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import Table from "../components/Table/Table";
 import { useUsers } from "../hooks/useUsers";
 import { useEffect, useState } from "react";
 import UserCard from "../components/UserCard/UserCard";
 
 const UsersPage = () => {
-  const { users, isLoading, error, total, page, setPage, sort, setSort } =
-    useUsers();
+  const {
+    users,
+    isLoading,
+    error,
+    total,
+    page,
+    setPage,
+    sort,
+    setSort,
+    setSearch,
+  } = useUsers();
   const [selectId, setSelectId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [searchString, setSearchString] = useState("");
 
   useEffect(() => {
     if (selectId) {
@@ -30,8 +41,49 @@ const UsersPage = () => {
     setSelectId(null);
   };
 
+  const handleChangeSearchString = (event) => {
+    const str = event.target.value;
+
+    setSearchString(str);
+  };
+
+  const handleClickSearch = () => {
+    setSearch(searchString);
+  };
+
   return (
-    <div style={{ width: "1400px", margin: "0 auto" }}>
+    <div
+      style={{
+        width: "1400px",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "end",
+        gap: 12,
+        paddingTop: 20,
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "700px",
+          gap: "12px",
+        }}
+      >
+        <Input
+          placeholder="Поиск по ФИО, возрасту, полу, номеру телефона..."
+          onChange={handleChangeSearchString}
+        />
+        <Button
+          icon={<SearchOutlined />}
+          type="primary"
+          onClick={handleClickSearch}
+        >
+          Поиск
+        </Button>
+      </div>
+
       <div
         style={{
           display: "flex",
