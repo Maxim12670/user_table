@@ -48,6 +48,7 @@ const UsersPage = () => {
 
   const handleClickSearch = () => {
     setSearch(searchString);
+    setPage(1);
   };
 
   return (
