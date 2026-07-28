@@ -2,7 +2,7 @@
 
 ## Стек технологий
 
-React, JavaScript, Vite, CSS Modules, FSD
+React, JavaScript, Vite, CSS Modules, Ant Design, TanStack (table)
 
 ---
 
