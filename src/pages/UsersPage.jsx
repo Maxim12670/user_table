@@ -4,6 +4,8 @@ import Table from "../components/Table/Table";
 import UserCard from "../components/UserCard/UserCard";
 import { useUsers } from "../hooks/useUsers";
 import SearchForm from "../components/SearchForm/SearchForm";
+import ErrorView from "../components/ErrorView/ErrorView";
+import style from "./UserPage.module.css";
 
 const UsersPage = () => {
   const {
@@ -28,7 +30,11 @@ const UsersPage = () => {
   }, [selectId]);
 
   if (error) {
-    return <div>Ошибка загрузки: {error}</div>;
+    return (
+      <div className={style.page__error}>
+        <ErrorView message={error} />
+      </div>
+    );
   }
 
   const handleSelectUser = (userId) => {
@@ -45,28 +51,10 @@ const UsersPage = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "1400px",
-        margin: "0 auto",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "end",
-        gap: 12,
-        paddingTop: 20,
-      }}
-    >
+    <div className={style.page}>
       <SearchForm onChange={setSearchString} onClick={handleClickSearch} />
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "20px",
-          width: "100%",
-        }}
-      >
+      <div className={style.page__container}>
         {!isLoading ? (
           <Table
             users={users}
